@@ -13,7 +13,7 @@ public class Cards : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        getCards();
         
     }
 
@@ -42,7 +42,7 @@ public class Cards : MonoBehaviour
         curr = 1;
     }
 
-    void shuffleDeck()
+    public void shuffleDeck()
     {
         for(int i = Card.Length - 1; i > 0; --i)
         {
@@ -53,5 +53,17 @@ public class Cards : MonoBehaviour
             cards[i] = cards[w];
             cards[w] = v;
         }
+    }
+
+    public int Deal(CardScript cardScript)
+    {
+        cardScript.SetNameofSprite(Card[curr]);
+        cardScript.setCardValue(cards[curr++]);
+        return cardScript.returnValue();
+    }
+
+    public Sprite GetCard()
+    {
+        return Card[0];
     }
 }
