@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Button dealbtn;
+    public Button DealBtn;
     public Button hitbtn;
     public Button standbtn;
     public Button splitbtn;
@@ -16,11 +16,13 @@ public class GameManager : MonoBehaviour
 
     public GameObject hideCard;
 
+
     
     // Start is called before the first frame update
     void Start()
     {
         DealClicked();
+        //GameObject.Find("DealBtn").GetComponent<Button>().onClick.AddListener(() => DealClicked());
         //hitbtn.onClick.AddListener(() => HitClicked());
         //standbtn.onClick.AddListener(() => StandClicked());
         //splitbtn.onClick.AddListener(() => SplitClicked());
@@ -32,8 +34,7 @@ public class GameManager : MonoBehaviour
     {
         
     }
-
-    private void DealClicked()
+    void DealClicked()
     {
         Debug.Log("Test");
         
@@ -41,13 +42,12 @@ public class GameManager : MonoBehaviour
         dealer.ResetHand();
         
         
-        GameObject.Find("Deck").GetComponent<Cards>().shuffleDeck();
+        GameObject.Find("cardShoe").GetComponent<Cards>().shuffleDeck();
         player.StartHand();
         dealer.StartHand();
         
-        
         hideCard.GetComponent<Renderer>().enabled = true;
-        dealbtn.gameObject.SetActive(false);
-
+        // DealBtn.gameObject.SetActive(false);
+        
     }
 }

@@ -44,7 +44,7 @@ public class Cards : MonoBehaviour
 
     public void shuffleDeck()
     {
-        for(int i = Card.Length - 1; i > 0; --i)
+        for(int i = Card.Length - 1; i > 0; i--)
         {
             int w = Mathf.FloorToInt(Random.Range(0.0f, 1.0f) * Card.Length - 1) +1;
             Sprite faceCard = Card[i];
@@ -53,6 +53,7 @@ public class Cards : MonoBehaviour
             cards[i] = cards[w];
             cards[w] = v;
         }
+        curr = 1;
     }
 
     public int Deal(CardScript cardScript)
