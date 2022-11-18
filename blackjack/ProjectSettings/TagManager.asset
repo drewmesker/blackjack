@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Cards
+    uniqueID: 54618253
+    locked: 0
+  - name: UI Display
+    uniqueID: 4145512721
+    locked: 0
