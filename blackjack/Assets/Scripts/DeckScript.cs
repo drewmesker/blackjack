@@ -6,7 +6,7 @@ public class DeckScript : MonoBehaviour
 {
     public Sprite[] cardSprites;
     int[] cardValues = new int[53];
-    int currentIndex = 0;
+    int curr = 0;
 
     void Start()
     {
@@ -28,27 +28,29 @@ public class DeckScript : MonoBehaviour
         }
     }
 
+
+    // Sourced from Kaiser YouTube video
     public void Shuffle()
     {
         for(int i = cardSprites.Length -1; i > 0; --i)
         {
             int j = Mathf.FloorToInt(Random.Range(0.0f, 1.0f) * cardSprites.Length - 1) + 1;
-            Sprite face = cardSprites[i];
+            Sprite faceCard = cardSprites[i];
             cardSprites[i] = cardSprites[j];
-            cardSprites[j] = face;
+            cardSprites[j] = faceCard;
 
             int value = cardValues[i];
             cardValues[i] = cardValues[j];
             cardValues[j] = value;
         }
-        currentIndex = 1;
+        curr = 1;
     }
 
     public int Deal(CardScript cardScript)
     {
-        cardScript.SetSprite(cardSprites[currentIndex]);
-        cardScript.SetValue(cardValues[currentIndex++]);
-        return cardScript.GetValueOfCard();
+        cardScript.SetSprite(cardSprites[curr]);
+        cardScript.SetValue(cardValues[curr++]);
+        return cardScript.returnValue();
     }
 
     public Sprite GetCard()

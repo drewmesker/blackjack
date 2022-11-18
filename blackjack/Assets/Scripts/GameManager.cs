@@ -12,8 +12,6 @@ public class GameManager : MonoBehaviour
     public Button betBtn;
     public Button doubleBtn;
     public Button splitBtn;
-
-    // Access the player and dealer's script
     public Player playerScript;
     public Player dealerScript;
 
@@ -50,9 +48,9 @@ public class GameManager : MonoBehaviour
 
     private void DoubleClicked()
     {
-         if (playerScript.cardIndex == 2)
+         if (playerScript.ind == 2)
         {
-            playerScript.AdjustMoney(-pot);
+            playerScript.changeBalance(-pot);
             cashText.text = "$" + playerScript.GetMoney().ToString();
             pot += (pot * 2);
             betsText.text = "$" + pot.ToString();
@@ -66,6 +64,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+        // Sources from Kaiser YouTube video
         private void DealClicked()
     {
         playerScript.ResetHand();
@@ -93,11 +93,14 @@ public class GameManager : MonoBehaviour
 
     private void HitClicked()
     {
-        if (playerScript.cardIndex <= 10)
+        if (playerScript.ind <= 10)
         {
             playerScript.GetCard();
             scoreText.text = playerScript.handValue.ToString();
-            if (playerScript.handValue > 20) RoundOver();
+            if (playerScript.handValue > 20)
+            {
+                RoundOver();
+            }
         }
     }
 
@@ -111,7 +114,7 @@ public class GameManager : MonoBehaviour
 
     private void HitDealer()
     {
-        while (dealerScript.handValue < 16 && dealerScript.cardIndex < 10)
+        while (dealerScript.handValue < 16 && dealerScript.ind < 10)
         {
             dealerScript.GetCard();
             dealerScoreText.text = dealerScript.handValue.ToString();
@@ -131,7 +134,7 @@ public class GameManager : MonoBehaviour
          else if(dealerScript.handValue > 21)
          {
             mainText.text = "Winner!";
-            playerScript.AdjustMoney(pot*2);
+            playerScript.changeBalance(pot*2);
          }
          else if(dealerScript.handValue > playerScript.handValue)
          {
@@ -140,13 +143,13 @@ public class GameManager : MonoBehaviour
          else if(playerScript.handValue > dealerScript.handValue)
          {
             mainText.text = "Winner!";
-            playerScript.AdjustMoney(pot*2);
+            playerScript.changeBalance(pot*2);
          }
          
          else if(playerScript.handValue == dealerScript.handValue)
          {
             mainText.text = "Push.";
-            playerScript.AdjustMoney(pot);
+            playerScript.changeBalance(pot);
          }
          else
          {
@@ -169,7 +172,7 @@ public class GameManager : MonoBehaviour
 
     void BetClicked()
     {
-        playerScript.AdjustMoney(-20);
+        playerScript.changeBalance(-20);
         cashText.text = "$" + playerScript.GetMoney().ToString();
         pot += 20;
         betsText.text = "$" + pot.ToString();

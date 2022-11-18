@@ -7,17 +7,17 @@ public class CardScript : MonoBehaviour
 
     public int value = 0;
 
-    public int GetValueOfCard()
+    public int returnValue()
     {
         return value;
     }
 
-    public void SetValue(int newValue)
+    public void SetValue(int newV)
     {
-        value = newValue;
+        value = newV;
     }
 
-    public string GetSpriteName()
+    public string getNameOfSprite()
     {
         return GetComponent<SpriteRenderer>().sprite.name;
     }
@@ -29,8 +29,7 @@ public class CardScript : MonoBehaviour
 
     public void ResetCard()
     {
-        Sprite back = GameObject.Find("DeckCard").GetComponent<DeckScript>().GetCard();
-        gameObject.GetComponent<SpriteRenderer>().sprite = back;
+        gameObject.GetComponent<SpriteRenderer>().sprite = GameObject.Find("DeckCard").GetComponent<DeckScript>().GetCard();
         value = 0;
     }
 }
